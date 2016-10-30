@@ -1,2 +1,5 @@
 # Directory for uploaded files
 uploaded/
+
+# Compiled code defaults to folder name
+object-version-reconstruction
