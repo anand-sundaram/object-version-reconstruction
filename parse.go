@@ -9,7 +9,7 @@ import(
 
 func parseCsv(w http.ResponseWriter, r *http.Request, filename string) {
     fmt.Println("method:", r.Method)
-    f, err := os.Open("./uploaded/" + filename)
+    f, err := os.Open("." + pathSeparator + uploadFolderName + pathSeparator + filename)
     if err != nil {
         fmt.Println(err)
         return

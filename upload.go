@@ -9,7 +9,6 @@ import(
     "crypto/md5"
     "time"
     "strconv"
-    "path/filepath"
 )
 
 func upload(w http.ResponseWriter, r *http.Request) {
@@ -31,8 +30,8 @@ func upload(w http.ResponseWriter, r *http.Request) {
         }
         defer file.Close()
         fmt.Fprintf(w, "%v", handler.Header)
-        os.Mkdir("." + string(filepath.Separator) + "uploaded", 0777)
-        f, err := os.OpenFile("./uploaded/"+handler.Filename, os.O_WRONLY|os.O_CREATE, 0666)
+        os.Mkdir("." + pathSeparator + uploadFolderName, 0777)
+        f, err := os.OpenFile("." + pathSeparator + uploadFolderName + pathSeparator + handler.Filename, os.O_WRONLY|os.O_CREATE, 0666)
         if err != nil {
             fmt.Println(err)
             return
