@@ -29,7 +29,7 @@ func upload(w http.ResponseWriter, r *http.Request) {
             return
         }
         defer file.Close()
-        fmt.Fprintf(w, "%v", handler.Header)
+        
         os.Mkdir("." + pathSeparator + uploadFolderName, 0777)
         f, err := os.OpenFile("." + pathSeparator + uploadFolderName + pathSeparator + handler.Filename, os.O_WRONLY|os.O_CREATE, 0666)
         if err != nil {
