@@ -36,3 +36,20 @@ func objectType(w http.ResponseWriter, r *http.Request) {
 		}
 	}
 }
+
+func objectTypeId(w http.ResponseWriter, r *http.Request) {
+	vars := mux.Vars(r)
+	fmt.Fprintf(w, "Object Type is %v and Object ID is %v", vars["type"], vars["id"])
+	fmt.Fprintln(w)
+
+	records := parseCsv(w, r, "upload.csv")
+
+	for i := 0; i < len(records); i++ {
+		if strings.Compare(records[i][1], vars["type"]) == 0 && strings.Compare(records[i][0], vars["id"]) == 0 {
+			for j := 0; j < len(records[i]); j++ {
+	            fmt.Fprintf(w, records[i][j] + " ")
+	        }
+	        fmt.Fprintln(w)
+		}
+	}
+}
