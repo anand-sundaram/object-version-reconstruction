@@ -32,19 +32,18 @@ func parseCsv(w http.ResponseWriter, r *http.Request, filename string) [][]strin
         fmt.Println(err)
         return nil
     }
+
+    objectPropertyStateSlice := make([]objectPropertyState, 0)
     for i := 1; i < len(records); i++ {
-        createObjectPropertyState(records[i])
-        for j := 0; j < len(records[i]); j++ {
-            fmt.Print(records[i][j] + " ")
-        }
-        fmt.Println()
+        objectPropertyStateSlice = append(objectPropertyStateSlice, createObjectPropertyState(records[i])...)
     }
+    fmt.Println(objectPropertyStateSlice)
     return records
 }
 
 func createObjectPropertyState(record []string) []objectPropertyState {
     propertyValueMap := stringToPropertyValueMap(record[3])
-    opsArray := make([]objectPropertyState, 0)
+    opsSlice := make([]objectPropertyState, 0)
     t, err := strconv.ParseInt(record[2], 10, 64)
     fmt.Println(time.Unix(t, 0))
     if err != nil {
@@ -59,10 +58,10 @@ func createObjectPropertyState(record []string) []objectPropertyState {
             property: k,
             value: v,
         }
-        opsArray = append(opsArray, ops)
+        opsSlice = append(opsSlice, ops)
     }
-    fmt.Println(opsArray)
-    return opsArray
+    fmt.Println(opsSlice)
+    return opsSlice
 }
 
 func stringToPropertyValueMap(str string) map[string]string {
