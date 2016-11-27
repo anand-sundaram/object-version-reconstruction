@@ -32,7 +32,7 @@ func parseCsv(w http.ResponseWriter, r *http.Request, filename string) [][]strin
         fmt.Println(err)
         return nil
     }
-    for i := 0; i < len(records); i++ {
+    for i := 1; i < len(records); i++ {
         createObjectPropertyState(records[i])
         for j := 0; j < len(records[i]); j++ {
             fmt.Print(records[i][j] + " ")
