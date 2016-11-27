@@ -16,6 +16,7 @@ var uploadFolderName = "uploaded"
 var pathSeparator = string(filepath.Separator)
 
 func main() {
+	dbInit()
 	router := mux.NewRouter().StrictSlash(true)
     router.HandleFunc("/", upload)
     router.HandleFunc("/type/{type}", objectType)
