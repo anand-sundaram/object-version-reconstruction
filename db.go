@@ -8,14 +8,15 @@ import (
 )
 
 var (
-    // DBCon is the connection handle
-    // for the database
     DBCon *sql.DB
 )
 
 func dbInit() {
 	var err error
-	DBCon, err = sql.Open("mysql", config.Username + ":" + config.Password + "@tcp(" + config.Host + ":" + config.Port + ")/" + config.DBName + "?parseTime=true")
+	dataSourceName := fmt.Sprintf("%s:%s@tcp(%s:%s)/", config.Username, config.Password, config.Host, config.Port)
+	dataSourceWithDBName := fmt.Sprintf("%s:%s@tcp(%s:%s)/%s?parseTime=true", config.Username, config.Password, config.Host, config.Port, config.DBName)
+
+	DBCon, err = sql.Open("mysql", dataSourceName)
 	if err != nil {
 		panic(err)
 	}
@@ -25,8 +26,7 @@ func dbInit() {
 		panic(err)
 	}
 	
-
-	DBCon, err = sql.Open("mysql", config.Username + ":" + config.Password + "@tcp(" + config.Host + ":" + config.Port + ")/" + config.DBName + "?parseTime=true")
+	DBCon, err = sql.Open("mysql", dataSourceWithDBName)
 	if err != nil {
 		panic(err)
 	}
