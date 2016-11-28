@@ -15,7 +15,7 @@ var (
 
 func dbInit() {
 	var err error
-	DBCon, err = sql.Open("mysql", config.Username + ":" + config.Password + "@tcp(" + config.Host + ":" + config.Port + ")/" + config.DBName)
+	DBCon, err = sql.Open("mysql", config.Username + ":" + config.Password + "@tcp(" + config.Host + ":" + config.Port + ")/" + config.DBName + "?parseTime=true")
 	if err != nil {
 		panic(err)
 	}
@@ -26,7 +26,7 @@ func dbInit() {
 	}
 	
 
-	DBCon, err = sql.Open("mysql", config.Username + ":" + config.Password + "@" + config.Host + ":" + config.Port + "/" + config.DBName)
+	DBCon, err = sql.Open("mysql", config.Username + ":" + config.Password + "@tcp(" + config.Host + ":" + config.Port + ")/" + config.DBName + "?parseTime=true")
 	if err != nil {
 		panic(err)
 	}
@@ -56,7 +56,7 @@ func insertIntoDb(objectPropertyStates []objectPropertyState) {
 		}
 
 		fmt.Println("reached execution")
-		_, err = stmt.Exec(row.objectId, row.objectType, row.timestamp, row.property, row.value)
+		_, err = stmt.Exec(row.ObjectId, row.ObjectType, row.Timestamp, row.Property, row.Value)
 		if err != nil {
 			fmt.Println("error in executing")
 			panic(err)

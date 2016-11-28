@@ -11,11 +11,11 @@ import(
 )
 
 type objectPropertyState struct {
-    objectId string
-    objectType string
-    timestamp time.Time
-    property string
-    value string
+    ObjectId string
+    ObjectType string
+    Timestamp time.Time
+    Property string
+    Value string
 }
 
 func parseCsv(w http.ResponseWriter, r *http.Request, filename string) [][]string {
@@ -52,11 +52,11 @@ func createObjectPropertyState(record []string) []objectPropertyState {
     }
     for k, v := range propertyValueMap {
         ops := objectPropertyState{
-            objectId: record[0],
-            objectType: record[1],
-            timestamp: time.Unix(t, 0),
-            property: k,
-            value: v,
+            ObjectId: record[0],
+            ObjectType: record[1],
+            Timestamp: time.Unix(t, 0),
+            Property: k,
+            Value: v,
         }
         opsSlice = append(opsSlice, ops)
     }
