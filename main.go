@@ -14,6 +14,8 @@ func main() {
 	dbInit()
 	router := mux.NewRouter().StrictSlash(true)
     router.HandleFunc("/", upload)
+    router.HandleFunc("/display", display)
+    router.HandleFunc("/all", all)
     router.HandleFunc("/type/{type}", objectType)
     router.HandleFunc("/type/{type}/id/{id}", objectTypeId)
     router.HandleFunc("/type/{type}/id/{id}/time/{time}", objectTypeIdTime)
