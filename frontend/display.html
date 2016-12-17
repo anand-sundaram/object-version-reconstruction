@@ -1,0 +1,90 @@
+<html>
+<head>
+    <title>Upload file</title>
+    <script
+		src="https://code.jquery.com/jquery-3.1.1.min.js"
+		integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+		crossorigin="anonymous">
+  	</script>
+</head>
+<body>
+	<form>Filter by Object Type
+		<input type="text" name="type" required/>
+    	<input type="submit" value="filter" />
+	</form>
+	<p>or</p>
+	<form>Filter by Object Type
+		<input type="text" name="type" required/>
+		and Object ID
+		<input type="text" name="id" required/>
+    	<input type="submit" value="filter" />
+	</form>
+	<p>or</p>
+	<form>Filter by Object Type
+		<input type="text" name="type" required/>
+		and Object ID
+		<input type="text" name="id" required/>
+		and Timestamp
+		<input type="text" name="time" required/>
+    	<input type="submit" value="filter" />
+	</form>
+	<table>
+		<thead>
+			<tr>
+				<th>Object ID</th>
+				<th>Object Type</th>
+				<th>Timestamp</th>
+				<th>Property Changed</th>
+				<th>Altered Value</th>
+			</tr>
+		</thead>
+		<tbody>
+		</tbody>
+	</table>
+
+</body>
+</html>
+
+<script>
+$.getJSON( "all", function( data ) {
+	display(data);
+});
+
+$("form").submit(function() {
+	event.preventDefault();
+	var dataArray = $(this).serializeArray().reduce(function(array, current) {
+		array[current.name] = current.value;
+		console.log(current.name + " " + current.value)
+		return array;
+	}, {});
+	console.log(dataArray);
+	var url = "";
+	for (var name in arr = ["type", "id", "time"]) {
+		console.log(dataArray[arr[name]] + " " + arr[name]);
+		if (dataArray[arr[name]] != undefined) {
+			url = url + arr[name] + "/" + dataArray[arr[name]] + "/";
+		}
+	}
+	console.log(url);
+	$.getJSON(url, function( data ) {
+		console.log(data);
+		display(data);
+	});
+
+});
+
+function display(data) {
+	var body = "";
+	$.each(data, function(index, object) {
+		var row = "<tr>";
+		$.each(object, function(index, attribute) {
+			var column = "<td>" + attribute + "</td>";
+			row = row + column;
+		});
+		row = row + "</tr>";
+		body = body + row;
+	});
+	$("table tbody").html(body);
+}
+
+</script>
