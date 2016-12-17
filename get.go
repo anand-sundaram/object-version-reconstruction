@@ -9,6 +9,20 @@ import (
     "database/sql"
 )
 
+func all(w http.ResponseWriter, r *http.Request) {
+
+	sqlStr := `SELECT *
+		FROM object_property_state`
+    fmt.Println("reached prepare")
+	rows, err := DBCon.Query(sqlStr)
+	if err != nil {
+		fmt.Println("error in querying")
+		panic(err)
+	}
+
+	printJsonOutput(rows, w)
+}
+
 func objectType(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 
