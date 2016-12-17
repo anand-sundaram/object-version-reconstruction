@@ -77,7 +77,7 @@ $("form").submit(function() {
 		console.log(dataArray[arr[name]] + " " + arr[name]);
 		if (dataArray[arr[name]] != undefined) {
 			if (arr[name] == "time") {
-				url = url + arr[name] + "/" + Date.parse(dataArray[arr[name]])/1000 + "/";
+				url = url + arr[name] + "/" + dateTimeToUnix(dataArray[arr[name]]) + "/";
 			}
 			else {
 				url = url + arr[name] + "/" + dataArray[arr[name]] + "/";
@@ -91,6 +91,10 @@ $("form").submit(function() {
 	});
 
 });
+
+function dateTimeToUnix(dateTime) {
+	Date.parse(dateTime)/1000;
+}
 
 function display(data) {
 	var body = "";
