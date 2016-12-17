@@ -42,6 +42,15 @@ func dbInit() {
 	
 }
 
+func flushTable() {
+	var err error
+	_,err = DBCon.Exec(`TRUNCATE object_property_state;`)
+	if err != nil {
+		fmt.Println("error in executing")
+		panic(err)
+	}
+}
+
 func insertIntoDb(objectPropertyStates []objectPropertyState) {
 	fmt.Println("entered insert")
 

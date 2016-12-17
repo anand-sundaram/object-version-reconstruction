@@ -38,6 +38,7 @@ func parseCsv(w http.ResponseWriter, r *http.Request, filename string) [][]strin
         objectPropertyStateSlice = append(objectPropertyStateSlice, createObjectPropertyState(records[i])...)
     }
     fmt.Println(objectPropertyStateSlice)
+    flushTable()
     insertIntoDb(objectPropertyStateSlice)
     return records
 }
