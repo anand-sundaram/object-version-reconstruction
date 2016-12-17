@@ -6,6 +6,16 @@
 		integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
 		crossorigin="anonymous">
   	</script>
+	<script
+		src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
+		integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="
+		crossorigin="anonymous">
+	</script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/jquery-ui-timepicker-addon/1.6.3/jquery-ui-timepicker-addon.min.js">
+	</script>
+	<link type='text/css' rel='stylesheet' href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" />
+	<link type='text/css' rel='stylesheet' href="https://cdnjs.cloudflare.com/ajax/libs/jquery-ui-timepicker-addon/1.6.3/jquery-ui-timepicker-addon.min.css" />
 </head>
 <body>
 	<form>Filter by Object Type
@@ -50,6 +60,10 @@ $.getJSON( "all", function( data ) {
 	display(data);
 });
 
+$("input[name='time']").datetimepicker({
+	timeFormat: "hh:mm:ss tt",
+});
+
 $("form").submit(function() {
 	event.preventDefault();
 	var dataArray = $(this).serializeArray().reduce(function(array, current) {
@@ -62,7 +76,12 @@ $("form").submit(function() {
 	for (var name in arr = ["type", "id", "time"]) {
 		console.log(dataArray[arr[name]] + " " + arr[name]);
 		if (dataArray[arr[name]] != undefined) {
-			url = url + arr[name] + "/" + dataArray[arr[name]] + "/";
+			if (arr[name] == "time") {
+				url = url + arr[name] + "/" + Date.parse(dataArray[arr[name]])/1000 + "/";
+			}
+			else {
+				url = url + arr[name] + "/" + dataArray[arr[name]] + "/";
+			}
 		}
 	}
 	console.log(url);
