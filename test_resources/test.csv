@@ -1,0 +1,7 @@
+object_id,object_type,timestamp,object_changes
+1,ObjectA,412351252,"{""property1"": ""value""}"
+2,ObjectA,451232134,"{""property3"": ""value""}"
+1,ObjectB,456662343,"{""property1"": ""value""}"
+1,ObjectA,467765765,"{""property2"": ""value""}"
+2,ObjectA,451232123,"{""property2"": ""value""}"
+1,ObjectA,427765765,"{""property1"": ""altered2 value""}"
