@@ -43,7 +43,7 @@ func Upload(w http.ResponseWriter, r *http.Request) {
         }
         defer f.Close()
         io.Copy(f, file)
-        parseCsv(w, r, handler.Filename)
+        parse(w, r, handler.Filename)
         http.Redirect(w, r, "display", 301)
     }
 }
