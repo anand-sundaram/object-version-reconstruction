@@ -3,21 +3,19 @@ package main
 import (
     "log"
     "net/http"
-    "path/filepath"
     "github.com/gorilla/mux"
+    db "./db"
+    actions "./actions"
 )
 
-var uploadFolderName = "uploaded"
-var pathSeparator = string(filepath.Separator)
-
 func main() {
-	dbInit()
+	db.DbInit()
 	router := mux.NewRouter().StrictSlash(true)
-    router.HandleFunc("/", upload)
-    router.HandleFunc("/display", display)
-    router.HandleFunc("/all", all)
-    router.HandleFunc("/type/{type}", objectType)
-    router.HandleFunc("/type/{type}/id/{id}", objectTypeId)
-    router.HandleFunc("/type/{type}/id/{id}/time/{time}", objectTypeIdTime)
+    router.HandleFunc("/", actions.Upload)
+    router.HandleFunc("/display", actions.Display)
+    router.HandleFunc("/all", db.All)
+    router.HandleFunc("/type/{type}", db.ObjectType)
+    router.HandleFunc("/type/{type}/id/{id}", db.ObjectTypeId)
+    router.HandleFunc("/type/{type}/id/{id}/time/{time}", db.ObjectTypeIdTime)
     log.Fatal(http.ListenAndServe(":9090", router))
 }

@@ -1,4 +1,4 @@
-package main
+package actions
 
 import(
     "fmt"
@@ -10,7 +10,7 @@ import(
     "strconv"
 )
 
-func display(w http.ResponseWriter, r *http.Request) {
+func Display(w http.ResponseWriter, r *http.Request) {
     fmt.Println("method:", r.Method)
     if r.Method == "GET" {
         crutime := time.Now().Unix()

@@ -1,7 +1,8 @@
-package main
+package actions
 
 import(
     "fmt"
+    "path/filepath"
     "html/template"
     "net/http"
     "io"
@@ -11,7 +12,11 @@ import(
     "strconv"
 )
 
-func upload(w http.ResponseWriter, r *http.Request) {
+
+var uploadFolderName = "uploaded"
+var pathSeparator = string(filepath.Separator)
+
+func Upload(w http.ResponseWriter, r *http.Request) {
     fmt.Println("method:", r.Method)
     if r.Method == "GET" {
         crutime := time.Now().Unix()

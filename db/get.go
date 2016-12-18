@@ -1,4 +1,4 @@
-package main
+package db
 
 import (
     "net/http"
@@ -7,9 +7,10 @@ import (
     "encoding/json"
     "time"
     "database/sql"
+    models "../models"
 )
 
-func all(w http.ResponseWriter, r *http.Request) {
+func All(w http.ResponseWriter, r *http.Request) {
 
 	sqlStr := `SELECT *
 		FROM object_property_state`
@@ -23,7 +24,7 @@ func all(w http.ResponseWriter, r *http.Request) {
 	printJsonOutput(rows, w)
 }
 
-func objectType(w http.ResponseWriter, r *http.Request) {
+func ObjectType(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 
 	sqlStr := `SELECT * 
@@ -39,7 +40,7 @@ func objectType(w http.ResponseWriter, r *http.Request) {
 	printJsonOutput(rows, w)
 }
 
-func objectTypeId(w http.ResponseWriter, r *http.Request) {
+func ObjectTypeId(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 
 	sqlStr := `SELECT * 
@@ -56,7 +57,7 @@ func objectTypeId(w http.ResponseWriter, r *http.Request) {
 	printJsonOutput(rows, w)
 }
 
-func objectTypeIdTime(w http.ResponseWriter, r *http.Request) {
+func ObjectTypeIdTime(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 
 	sqlStr := `SELECT ops.object_id, ops.object_type, ops.timestamp, ops.property, ops.value
@@ -84,7 +85,7 @@ func objectTypeIdTime(w http.ResponseWriter, r *http.Request) {
 }
 
 func printJsonOutput(rows *sql.Rows, w http.ResponseWriter) {
-	objectPropertyStateSlice := make([]objectPropertyState, 0)
+	objectPropertyStateSlice := make([]models.ObjectPropertyState, 0)
 	for rows.Next() {
 		var objectId string
 	    var objectType string
@@ -99,7 +100,7 @@ func printJsonOutput(rows *sql.Rows, w http.ResponseWriter) {
 	        return
 	    }
 
-	    ops := objectPropertyState{
+	    ops := models.ObjectPropertyState{
             ObjectId: objectId,
             ObjectType: objectType,
             Timestamp: timestamp,

@@ -1,17 +1,18 @@
-package main
+package db
 
 import (
 	"database/sql"
 	_ "github.com/go-sql-driver/mysql"
 	"fmt"
-	config "./config"
+	config "../config"
+	models "../models"
 )
 
 var (
     DBCon *sql.DB
 )
 
-func dbInit() {
+func DbInit() {
 	var err error
 	dataSourceName := fmt.Sprintf("%s:%s@tcp(%s:%s)/", config.Username, config.Password, config.Host, config.Port)
 	dataSourceWithDBName := fmt.Sprintf("%s:%s@tcp(%s:%s)/%s?parseTime=true", config.Username, config.Password, config.Host, config.Port, config.DBName)
@@ -42,7 +43,7 @@ func dbInit() {
 	
 }
 
-func flushTable() {
+func FlushTable() {
 	var err error
 	_,err = DBCon.Exec(`TRUNCATE object_property_state;`)
 	if err != nil {
@@ -51,7 +52,7 @@ func flushTable() {
 	}
 }
 
-func insertIntoDb(objectPropertyStates []objectPropertyState) {
+func InsertIntoDb(objectPropertyStates []models.ObjectPropertyState) {
 	fmt.Println("entered insert")
 
 	for _, row := range objectPropertyStates {
