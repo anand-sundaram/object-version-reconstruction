@@ -68,13 +68,10 @@ $("form").submit(function() {
 	event.preventDefault();
 	var dataArray = $(this).serializeArray().reduce(function(array, current) {
 		array[current.name] = current.value;
-		console.log(current.name + " " + current.value)
 		return array;
 	}, {});
-	console.log(dataArray);
 	var url = "";
 	for (var name in arr = ["type", "id", "time"]) {
-		console.log(dataArray[arr[name]] + " " + arr[name]);
 		if (dataArray[arr[name]] != undefined) {
 			if (arr[name] == "time") {
 				url = url + arr[name] + "/" + dateTimeToUnix(dataArray[arr[name]]) + "/";
@@ -84,9 +81,7 @@ $("form").submit(function() {
 			}
 		}
 	}
-	console.log(url);
 	$.getJSON(url, function( data ) {
-		console.log(data);
 		display(data);
 	});
 
