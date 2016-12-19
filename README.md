@@ -22,33 +22,40 @@ The CSV columns are:
 ## How to use the application:
 
 You can visit [demo](http://13.76.208.65:9090/) here.
-The home page allows you to upload a CSV file. Take a look at `test_resources/test.csv` for the ideal format of the CSV file (Note that the timestamp is Unix timestamp format, and the object_changes is in JSON format).
+The home page allows you to upload a CSV file. Take a look at `test_resources/test.csv` for the ideal format of the CSV file (note that the timestamp is Unix timestamp format, and the object_changes is in JSON format).
 
-Each time a new csv file is uploaded, the database is flushed and data from the csv file is inserted into the database. Once the file is uploaded you are directed to a page which displays all the objects, and allows you to filter by `object type`, `object type and object id` and `object type, object id and timestamp`.
+Each time a new csv file is uploaded, the database is flushed and data from the csv file is inserted into the database. Once the file is uploaded you are directed to a page which displays all the object changes, and allows you to filter by `object type`, `object type and object id` and `object type, object id and timestamp`.
 
 
 ## Setting up the dev environment
 
-[Install Go](https://golang.org/doc/install)
-[Install MySQL](http://dev.mysql.com/doc/refman/5.7/en/installing.html)
+1. [Install Go](https://golang.org/doc/install)
 
-Clone this project into your workspace
+2. [Install MySQL](http://dev.mysql.com/doc/refman/5.7/en/installing.html)
 
-Run the following commands:
+3. Clone this project into your workspace by running:
+
+```
+git clone https://github.com/anand-sundaram/object-version-reconstruction.git
+```
+
+4. Run the following commands to import the external packages:
 
 ```
 go get github.com/go-sql-driver/mysql
 go get github.com/gorilla/mux
 ```
 
-Update the database details in dbconfig.sample.go and rename the file to dbconfig.go
+5. Update the database details in dbconfig.sample.go and rename the file to dbconfig.go
 
-Run the following from the project root folder
+6. Run the following command from the project root folder:
+
 ```
 go build
 ```
 
-Start the application by running the following from the project root folder
+7. Start the application by running the following from the project root folder
+
 ```
 ./object-version-reconstruction
 ```
@@ -57,4 +64,4 @@ The application will now be running at [http://localhost:9090](http://localhost:
 
 ## Stack
 
-This application is built using Golang. As this was my first time using Go I started out by looking for a web framework to use, but based on the recommendations I found online, I chose not to use any existing framework and instead make use of the language's rich libraries. The data from the CSV file is stored in a MySQL database.
+This application is built using Go. As this was my first time using Go I started out by looking for a web framework to use, but based on the recommendations I found online, I chose not to use any existing framework and instead make use of the language's rich libraries. The data from the CSV file is stored in a MySQL database.
