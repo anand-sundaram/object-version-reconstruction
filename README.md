@@ -35,30 +35,30 @@ Each time a new csv file is uploaded, the database is flushed and data from the 
 
 3. Clone this project into your workspace by running:
 
-```
-git clone https://github.com/anand-sundaram/object-version-reconstruction.git
-```
+	```
+	git clone https://github.com/anand-sundaram/object-version-reconstruction.git
+	```
 
 4. Run the following commands to import the external packages:
 
-```
-go get github.com/go-sql-driver/mysql
-go get github.com/gorilla/mux
-```
+	```
+	go get github.com/go-sql-driver/mysql
+	go get github.com/gorilla/mux
+	```
 
 5. Update the database details in dbconfig.sample.go and rename the file to dbconfig.go
 
 6. Run the following command from the project root folder:
 
-```
-go build
-```
+	```
+	go build
+	```
 
 7. Start the application by running the following from the project root folder
 
-```
-./object-version-reconstruction
-```
+	```
+	./object-version-reconstruction
+	```
 
 The application will now be running at [http://localhost:9090](http://localhost:9090).
 
