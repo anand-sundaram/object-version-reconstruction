@@ -53,8 +53,14 @@ Each time a new csv file is uploaded, the database is flushed and data from the 
 	```
 	go build
 	```
+7. The tests can be run with the following command from the project root folder:
 
-7. Start the application by running the following from the project root folder
+	```
+	go test ./...
+	```
+
+
+8. Start the application by running the following from the project root folder
 
 	```
 	./object-version-reconstruction
