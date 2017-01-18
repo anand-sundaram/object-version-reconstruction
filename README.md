@@ -39,7 +39,7 @@ Each time a new csv file is uploaded, the database is flushed and data from the 
 	git clone https://github.com/anand-sundaram/object-version-reconstruction.git
 	```
 
-4. Run the following commands to import the external packages:
+4. Run the following commands to import the external packages (after ensuring $GOPATH is set):
 
 	```
 	go get github.com/go-sql-driver/mysql
