@@ -21,7 +21,7 @@ The CSV columns are:
 
 ## How to use the application:
 
-You can visit [demo](http://13.76.208.65:9090/) here.
+You can visit [demo](http://188.166.244.40:9090/) here.
 The home page allows you to upload a CSV file. Take a look at `test_resources/test.csv` for the ideal format of the CSV file (note that the timestamp is Unix timestamp format, and the object_changes is in JSON format).
 
 Each time a new csv file is uploaded, the database is flushed and data from the csv file is inserted into the database. Once the file is uploaded you are directed to a page which displays all the object changes, and allows you to filter by `object type`, `object type and object id` and `object type, object id and timestamp`.
